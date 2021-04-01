@@ -42,12 +42,13 @@ class UploadAdoptReleaseFiles {
 
     private GHRepository getRepo(String vendor) {
         String token = System.getenv("GITHUB_TOKEN")
+        String server = System.getenv("GITHUB_SERVER")
         if (token == null) {
             System.err.println("Could not find GITHUB_TOKEN")
             System.exit(1)
         }
 
-        GitHub github = GitHub.connectUsingOAuth(token)
+        GitHub github = GitHub.connectUsingOAuth(server, token)
 
         github
                 .setConnector(new ImpatientHttpConnector(new HttpConnector() {
@@ -58,10 +59,10 @@ class UploadAdoptReleaseFiles {
                         (int) TimeUnit.SECONDS.toMillis(120),
                         (int) TimeUnit.SECONDS.toMillis(120)))
 
-        def repoName = "AdoptOpenJDK/open${version}-binaries"
+        def repoName = "runtimes/open${version}-binaries"
 
         if (vendor != "adopt") {
-            repoName = "AdoptOpenJDK/open${version}-${vendor}-binaries"
+            repoName = "runtimes/open${version}-${vendor}-binaries"
         }
 
         return github.getRepository(repoName)
