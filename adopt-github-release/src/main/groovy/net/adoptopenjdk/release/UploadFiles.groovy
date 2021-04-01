@@ -43,6 +43,7 @@ class UploadAdoptReleaseFiles {
     private GHRepository getRepo(String vendor) {
         String token = System.getenv("GITHUB_TOKEN")
         String org = System.getenv("GITHUB_ORG")
+        String server = System.getenv("GITHUB_SERVER")
         if (token == null) {
             System.err.println("Could not find GITHUB_TOKEN")
             System.exit(1)
@@ -51,8 +52,12 @@ class UploadAdoptReleaseFiles {
             System.err.println("Could not find GITHUB_ORG")
             System.exit(1)
         }
+        if (server == null) {
+            System.err.println("Could not find GITHUB_SERVER")
+            System.exit(1)
+        }
 
-        GitHub github = GitHub.connectUsingOAuth(token)
+        GitHub github = GitHub.connectUsingOAuth(server, token)
 
         github
                 .setConnector(new ImpatientHttpConnector(new HttpConnector() {
