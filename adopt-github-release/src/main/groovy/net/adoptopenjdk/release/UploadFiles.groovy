@@ -35,7 +35,11 @@ class UploadAdoptReleaseFiles {
         }
         grouped.each {entry ->
             GHRepository repo = getRepo(entry.getKey())
+            println repo
             GHRelease release = getRelease(repo)
+            println release
+            println "entry:${entry}"
+            println "entryValue:${entry.getValue()}"
             uploadFiles(release, entry.getValue())
         }
     }
@@ -79,6 +83,7 @@ class UploadAdoptReleaseFiles {
 
     private void uploadFiles(GHRelease release, List<File> files) {
         List<GHAsset> assets = release.getAssets()
+        println "Assets:${assets}"
         files.each { file ->
             // Delete existing asset
             assets
@@ -88,7 +93,10 @@ class UploadAdoptReleaseFiles {
                         existing.delete()
                     }
 
+            println "file:${file}"
             println("Uploading ${file.name}")
+            println "probeContentType:${Files.probeContentType(file.toPath())}"
+            println "releaseUploadUrl:${release.getUploadUrl()}"
             release.uploadAsset(file, Files.probeContentType(file.toPath()))
         }
     }
