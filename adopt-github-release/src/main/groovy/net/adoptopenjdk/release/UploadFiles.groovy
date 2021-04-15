@@ -132,8 +132,8 @@ private OptionAccessor parseArgs(String[] args) {
                 d longOpt: 'description', type: String, args: 1, 'Release description'
                 r longOpt: 'release', 'Is a release build'
                 h longOpt: 'help', 'Show usage information'
-                s longOpt: 'server', type: String, args: 1, 'Github server (optional)'
-                o longOpt: 'org', type: String, args: 1, 'Github org (optional)'
+                s longOpt: 'server', type: String, args: 1, optionalArg: true, defaultValue: 'https://api.github.com', 'Github server'
+                o longOpt: 'org', type: String, args: 1, optionalArg: true, defaultValue: 'AdoptOpenJDK', 'Github org'
             }
 
     def options = cliBuilder.parse(args)

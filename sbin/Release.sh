@@ -32,15 +32,15 @@ if [ "$RELEASE" != "true" ] && [ -z "${TIMESTAMP}" ]; then
 fi
 
 if [ -z "${GITHUB_SERVER}" ]; then
-   server="https://api.github.com"
+   server=""
 else
-   server=$GITHUB_SERVER
+   server="--server \"${$GITHUB_SERVER}\""
 fi
 
 if [ -z "${GITHUB_ORG}" ]; then
-   org="AdoptOpenJDK"
+   org=""
 else
-   org=$GITHUB_ORG
+   org="--org \"${$GITHUB_ORG}\""
 fi
 
 # Rename to ensure a consistent timestamp across release
@@ -90,4 +90,4 @@ fi
 
 cd adopt-github-release
 chmod +x gradlew
-GRADLE_USER_HOME=./gradle-cache ./gradlew --no-daemon run --args="--version \"${VERSION}\" --tag \"${TAG}\" --description \"${description}\" --server \"${server}\" --org \"${org}\" $RELEASE_OPTION $files"
+GRADLE_USER_HOME=./gradle-cache ./gradlew --no-daemon run --args="--version \"${VERSION}\" --tag \"${TAG}\" --description \"${description}\" ${server} ${org} $RELEASE_OPTION $files"
