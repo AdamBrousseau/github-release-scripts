@@ -34,7 +34,7 @@ fi
 if [ -z "${GITHUB_SERVER}" ]; then
    server=""
 else
-   server="--server \"${$GITHUB_SERVER}\""
+   server="--server \"${GITHUB_SERVER}\""
 fi
 
 echo "server:$server"
@@ -42,7 +42,7 @@ echo "server:$server"
 if [ -z "${GITHUB_ORG}" ]; then
    org=""
 else
-   org="--org \"${$GITHUB_ORG}\""
+   org="--org \"${GITHUB_ORG}\""
 fi
 echo "org:$org"
 
