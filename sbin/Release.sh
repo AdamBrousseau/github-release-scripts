@@ -37,11 +37,14 @@ else
    server="--server \"${$GITHUB_SERVER}\""
 fi
 
+echo "server:$server"
+
 if [ -z "${GITHUB_ORG}" ]; then
    org=""
 else
    org="--org \"${$GITHUB_ORG}\""
 fi
+echo "org:$org"
 
 # Rename to ensure a consistent timestamp across release
 for file in OpenJDK*
