@@ -13,12 +13,15 @@
 # limitations under the License.
 #
 
+# 2018-06-15-10-10
 timestampRegex="[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}-[[:digit:]]{2}-[[:digit:]]{2}"
 
 # IF YOU ARE MODIFYING THIS THEN THE FILE MATCHING IS PROBABLY WRONG, MAKE SURE openjdk-api, v2.js IS UPDATED TOO
 #      OpenJDK 8U_             -jdk        x64_           Linux_         hotspot_         2018-06-15-10-10                .tar.gz
 #      OpenJDK 11_             -jdk        x64_           Linux_         hotspot_         11_28                           .tar.gz
-regex="OpenJDK([[:digit:]]+)U?(-jre|-jdk)_([[:alnum:]\-]+)_([[:alnum:]]+)_([[:alnum:]]+).*\.(tar\.gz|zip|pkg|msi)";
+#regex="OpenJDK([[:digit:]]+)U?(-jre|-jdk)_([[:alnum:]\-]+)_([[:alnum:]]+)_([[:alnum:]]+).*\.(tar\.gz|zip|pkg|msi)";
+# ibm-java-jdk_ppc64le_linux_11.0.11.0.tar.gz
+regex="ibm=java(-jre|-jdk)_([[:alnum:]\-]+)_([[:alnum:]]+).*\.(tar\.gz|zip|pkg|msi|bin|rpm)";
 regexArchivesOnly="${regex}$";
 
 if [ -z "${TAG}" ]; then
@@ -44,7 +47,7 @@ else
 fi
 
 # Rename to ensure a consistent timestamp across release
-for file in OpenJDK*
+for file in ibm-java*
 do
   echo "Processing $file";
 
@@ -76,7 +79,7 @@ do
   fi
 done
 
-files=`ls $PWD/OpenJDK*{.tar.gz,.sha256.txt,.zip,.pkg,.msi,.json} | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'`
+files=`ls $PWD/ibm-java*{.tar.gz,.sha256.txt,.zip,.pkg,.msi,.json,.bin,.rpm} | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'`
 
 echo "Release: $RELEASE"
 
