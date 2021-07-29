@@ -33,7 +33,7 @@ class UploadAdoptReleaseFiles {
     void release() {
         def grouped = files.groupBy {
             switch (it.getName()) {
-                case ~/.*Semeru.*/: "ibm"; break;
+                case ~/.*semeru.*/: "ibm"; break;
             }
         }
         GHRepository repo = getRepo("ibm")
