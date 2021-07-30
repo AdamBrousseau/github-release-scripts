@@ -84,7 +84,10 @@ echo "Release: $RELEASE"
 
 RELEASE_OPTION=""
 if [ "$RELEASE" == "true" ]; then
-  description="Official Release of $TAG"
+    versionNumber = VERSION - 'jdk'
+  description="Official Release of IBM Semeru Runtime for Java $VERSION with Eclipse OpenJ9 $TAG
+License: GPL v2 with Classpath exception
+Certification: No"
   RELEASE_OPTION="--release"
 else
   TAG="${TAG}-beta"
