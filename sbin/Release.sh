@@ -46,7 +46,7 @@ else
 fi
 
 # Rename to ensure a consistent timestamp across release
-for file in Semeru-*
+for file in ibm-semeru-*
 do
   echo "Processing $file";
 
