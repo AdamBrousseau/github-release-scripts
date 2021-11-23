@@ -91,9 +91,15 @@ echo "Release: $RELEASE"
 RELEASE_OPTION=""
 if [ "$RELEASE" == "true" ]; then
     versionNumber=${VERSION#"JDK"}
-  description="Official Release of IBM Semeru Runtime Open Edition for Java $versionNumber with Eclipse OpenJ9 $TAG
+    if [ "$EDITION" == "open" ]; then
+        description="Official Release of IBM Semeru Runtime Open Edition for Java $versionNumber with Eclipse OpenJ9 $TAG
 License: GPL v2 with Classpath exception
 Certification: No"
+    elif [ "$EDITION" == "certified" ]; then
+        description="Official Release of IBM Semeru Runtime Certified Edition for Java $versionNumber with Eclipse OpenJ9 $TAG
+License: IBM Commercial
+Certification: Yes"
+    fi
   RELEASE_OPTION="--release"
 else
   TAG="${TAG}-beta"
